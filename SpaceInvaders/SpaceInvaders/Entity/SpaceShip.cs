@@ -18,7 +18,7 @@
             {
                 for(int j = 0; j < 6; j++)
                 {
-                    Console.SetCursorPosition((Console.LargestWindowWidth / 2) + j, (Console.LargestWindowHeight - 6) + i);
+                    Console.SetCursorPosition((Console.LargestWindowWidth / 2) + j, Console.LargestWindowHeight - 5 + i);
                     Console.Write(alien[i][j]);
                 }
             }
