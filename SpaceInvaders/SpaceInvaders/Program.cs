@@ -1,12 +1,20 @@
-﻿using System;
-
-namespace SpaceInvaders
+﻿namespace SpaceInvaders
 {
-    class Program
+    using System;
+
+    public class Program
     {
-        static void Main(string[] args)
+
+        private static void Main(string[] args)
         {
-            Console.WriteLine("Hello World!");
+            Console.SetWindowSize(Console.LargestWindowWidth, Console.LargestWindowHeight);
+            Console.SetBufferSize(Console.LargestWindowWidth, Console.LargestWindowHeight);
+            Console.WriteLine($"{Console.LargestWindowWidth} {Console.LargestWindowHeight}");
+
+            //Console.WriteLine(Console.WindowTop);
+            //Console.SetBufferSize(Console.BufferWidth, Console.BufferHeight);
+            var game = new Game();
+            game.Run();
         }
     }
 }
