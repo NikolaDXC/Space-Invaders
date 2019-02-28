@@ -6,11 +6,13 @@
     public class GameConsole : ConsoleConfiguration
     {
         private SpaceShip _ship;
+
         public GameConsole()
         {
             _ship = new SpaceShip();
             Setup();
         }
+
         public void Run()
         {
             while(true)

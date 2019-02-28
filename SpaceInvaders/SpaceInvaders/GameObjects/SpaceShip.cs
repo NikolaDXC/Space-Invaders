@@ -6,7 +6,7 @@
     public class SpaceShip : GameObject
     {
         private const int X = 105;
-        private const int Y = 45;
+        private const int Y = 0;
         private MoveType _currentMove;
         private const int LEFTBOUNDARY = 0;
         private const int RIGHTBOUNDARY = 204;

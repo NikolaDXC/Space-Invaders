@@ -4,6 +4,7 @@
     {
         protected Position _position;
         protected int _counter;
+
         public GameObject(Position position)
         {
             _position = position;
