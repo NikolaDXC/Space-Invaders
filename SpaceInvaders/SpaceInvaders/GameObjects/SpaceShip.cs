@@ -10,6 +10,7 @@
         private MoveType _currentMove;
         private const int LEFTBOUNDARY = 0;
         private const int RIGHTBOUNDARY = 204;
+
         public SpaceShip() : base(new Position(X, Y))
         {
             SpriteHeight = 5;
