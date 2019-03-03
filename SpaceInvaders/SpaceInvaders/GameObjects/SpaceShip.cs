@@ -5,36 +5,37 @@
 
     public class SpaceShip : GameObject
     {
-        private const int X = 105;
-        private const int Y = 0;
+        private const int X = 60;
+        private const int Y = 36;
         private MoveType _currentMove;
         private const int LEFTBOUNDARY = 0;
-        private const int RIGHTBOUNDARY = 204;
+        private const int RIGHTBOUNDARY = 111;
+        private ShipBullets _bullets;
+        private readonly string[] _sprite;
+        private const int SPRITE_HEIGHT = 3;
+        private const int SPRITE_WIDTH = 9;
 
         public SpaceShip() : base(new Position(X, Y))
         {
-            SpriteHeight = 5;
-            SpriteWidth = 8;
-
-            Sprite = new string[5]{
-               @"   /\   ",
-                "   ||   ",
-               @"  /||\  ",
-                " |:||:| ",
-               @" |/||\| "
+            _sprite = new string[3] {
+               @"   _|_   ",
+               @"  /|_|\  ",
+               @" |_/ \_| "
             };
+            _bullets = new ShipBullets();
         }
 
         public void GameObject()
         {
-            for(int i = 0; i < SpriteHeight; i++)
+            SetColor(ConsoleColor.White);
+            for(int i = 0; i < SPRITE_HEIGHT; i++)
             {
-                for(int j = 0; j < SpriteWidth; j++)
+                for(int j = 0; j < SPRITE_WIDTH; j++)
                 {
-                    Console.SetCursorPosition(_position.PositionX + j, _position.PositionY + i);
-                    Console.Write(Sprite[i][j].ToString());
+                    At(_position.PositionX + j, _position.PositionY + i, _sprite[i][j].ToString());
                 }
             }
+            _bullets.Plot();
         }
 
         public void KeyPressed()
@@ -57,10 +58,16 @@
                 case ConsoleKey.X:
                     _currentMove = MoveType.NOMOVE;
                     break;
+                case ConsoleKey.Spacebar:
+                    _bullets.Add(_position.PositionX);
+                    break;
+                default:
+                    break;
             }
         }
         public void Move()
         {
+            _bullets.Move();
             _counter++;
             if(_counter < 2)
             {
