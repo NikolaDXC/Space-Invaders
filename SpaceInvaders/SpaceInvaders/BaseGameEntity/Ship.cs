@@ -1,7 +1,7 @@
 ﻿namespace SpaceInvaders.BaseGameEntity
 {
     using SpaceInvaders.BaseEntity;
-    using SpaceInvaders.Enviroment;
+    using SpaceInvaders.GameObjects;
     using SpaceInvaders.GameObjects.Bullet.Ship;
     using System;
     using System.Collections.Generic;
@@ -13,8 +13,8 @@
         private MoveType _currentMove;
         private const int LEFTBOUNDARY = 0;
         private const int RIGHTBOUNDARY = 110;
-        private const int UPBOUNDARY = 3;
-        private const int DOWNBOUNDARY = 40;
+        //private const int UPBOUNDARY = 3;
+        //private const int DOWNBOUNDARY = 40;
         private const int MOVE_SPEED = 2;
         private ShipBullets _bullets;
         private readonly string[] _sprite;
@@ -38,25 +38,27 @@
             {
                 for(int j = 0; j < SPRITE_WIDTH; j++)
                 {
-                    Draw(_position.PositionX + j, _position.PositionY + i, _sprite[i][j].ToString());
+                    Draw(_position.X + j, _position.Y + i, _sprite[i][j].ToString());
                 }
             }
-
         }
         public void BulletsPlot() => _bullets.Plot();
+
         public void Init()
         {
-            _position.PositionX = X;
-            _position.PositionY = Y;
+            _position.X = X;
+            _position.Y = Y;
             _currentMove = MoveType.NOMOVE;
         }
+
         public void Unplot()
         {
             for(int i = 0; i < SPRITE_HEIGHT; i++)
             {
-                Draw(_position.PositionX, _position.PositionY + i, "         ");
+                Draw(_position.X, _position.Y + i, "         ");
             }
         }
+
         public void KeyPressed()
         {
             var info = new ConsoleKeyInfo();
@@ -80,22 +82,23 @@
                 //    _currentMove = MoveType.DOWN;
                 //    break;
                 case ConsoleKey.Spacebar:
-                    _bullets.Add(_position.PositionX, _position.PositionY);
+                    _bullets.Add(_position.X, _position.Y);
                     break;
                 default:
                     _currentMove = MoveType.NOMOVE;
                     break;
             }
         }
+
         public void Move()
         {
-            if(_currentMove == MoveType.LEFT && _position.PositionX > LEFTBOUNDARY)
+            if(_currentMove == MoveType.LEFT && _position.X > LEFTBOUNDARY)
             {
-                _position.PositionX--;
+                _position.X--;
             }
-            if(_currentMove == MoveType.RIGHT && _position.PositionX < RIGHTBOUNDARY)
+            if(_currentMove == MoveType.RIGHT && _position.X < RIGHTBOUNDARY)
             {
-                _position.PositionX++;
+                _position.X++;
             }
             //if(_currentMove == MoveType.UP && _position.PositionY > UPBOUNDARY)
             //{

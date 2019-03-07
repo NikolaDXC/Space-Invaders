@@ -1,19 +1,28 @@
 ﻿namespace SpaceInvaders.GameObjects.Bullet.Ship
 {
     using SpaceInvaders.BaseGameEntity;
-    using SpaceInvaders.Enviroment;
+    using SpaceInvaders.Render;
     using System.Collections.Generic;
 
     public class ShipBullets : Bullets
     {
         private const int UPPER_BOUNDARY = 2;
-        private const int SPEED = 1;
+        private const int SPEED = 2;
+
         public ShipBullets()
         {
             _boundary = UPPER_BOUNDARY;
+            _maxBullets = 5;
             _delay = new Delay(SPEED);
         }
-        public void Add(int x, int y) => _bullets.Add(new ShipBullet(x, y));
+        public void Add(int x, int y)
+        {
+            if(_bullets.Count >= _maxBullets)
+            {
+                return;
+            }
+            _bullets.Add(new ShipSingleBullet(x, y));
+        }
 
         public void DeleteBullets(List<Bullet> bullets)
         {
@@ -22,6 +31,5 @@
                 _bullets.Remove(bullet);
             }
         }
-
     }
 }

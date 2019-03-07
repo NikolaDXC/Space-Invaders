@@ -10,6 +10,7 @@
             _isDestroyed = isDestroyed;
         }
         private Position _position { get; }
+
         public bool _isDestroyed { get; }
     }
 }

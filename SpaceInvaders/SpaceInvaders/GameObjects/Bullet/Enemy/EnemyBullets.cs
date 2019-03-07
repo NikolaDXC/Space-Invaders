@@ -2,7 +2,7 @@
 {
     using SpaceInvaders.BaseEntity;
     using SpaceInvaders.BaseGameEntity;
-    using SpaceInvaders.Enviroment;
+    using SpaceInvaders.Render;
     using System;
     using System.Collections.Generic;
 
@@ -10,12 +10,14 @@
     {
         private const int LOWER_BOUNDARY = 45;
         private const int SPEED = 3;
+
         public EnemyBullets()
         {
             _delay = new Delay(SPEED);
             _maxBullets = 5;
             _boundary = LOWER_BOUNDARY;
         }
+
         public void GenerateBullets(List<Position> position)
         {
             if(_bullets.Count >= _maxBullets)
@@ -24,10 +26,10 @@
             }
             var random = new Random();
             int index = random.Next(0, position.Count);
-            int x = position[index].PositionX + 5;
-            int y = position[index].PositionY + 3;
+            int x = position[index].X + 5;
+            int y = position[index].Y + 3;
 
-            _bullets.Add(new EnemyBullet(x, y));
+            _bullets.Add(new EnemySingleBullet(x, y));
         }
         public bool HasDestroyedShip(Position shipPosition)
         {
@@ -39,29 +41,32 @@
             {
                 position = bullet.GetPosition();
 
-                if((position.PositionX > shipPosition.PositionX + 3
-                && position.PositionX < shipPosition.PositionX + 6
-                && position.PositionY == shipPosition.PositionY)
+                if((position.X > shipPosition.X + 3
+                && position.X < shipPosition.X + 6
+                && position.Y == shipPosition.Y)
                 ||
-                  (position.PositionX > shipPosition.PositionX + 2
-                && position.PositionX < shipPosition.PositionX + 7
-                && position.PositionY == shipPosition.PositionY + 1)
+                  (position.X > shipPosition.X + 2
+                && position.X < shipPosition.X + 7
+                && position.Y == shipPosition.Y + 1)
                 ||
-                  (position.PositionX > shipPosition.PositionX + 1
-                && position.PositionX < shipPosition.PositionX + 8
-                && position.PositionY == shipPosition.PositionY + 2))
+                  (position.X > shipPosition.X
+                && position.X < shipPosition.X + 8
+                && position.Y == shipPosition.Y + 2))
                 {
                     bulletsToDelete.Add(bullet);
                     bullet.Unplot();
                     result = true;
                 }
             }
+            return result;
+        }
 
-            foreach(var bullet in bulletsToDelete)
+        public void DeleteBullets(List<Bullet> bullets)
+        {
+            foreach(var bullet in bullets)
             {
                 _bullets.Remove(bullet);
             }
-            return result;
         }
     }
 }

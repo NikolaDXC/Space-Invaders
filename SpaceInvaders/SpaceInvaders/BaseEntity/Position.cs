@@ -4,12 +4,12 @@
     {
         public Position(int x, int y)
         {
-            PositionX = x;
-            PositionY = y;
+            X = x;
+            Y = y;
         }
 
-        public int PositionX { get; set; }
+        public int X { get; set; }
 
-        public int PositionY { get; set; }
+        public int Y { get; set; }
     }
 }

@@ -1,13 +1,14 @@
-﻿using SpaceInvaders.BaseEntity;
-using SpaceInvaders.BaseGameEntity;
-using SpaceInvaders.EntityObjects;
-using SpaceInvaders.Enviroment;
-using SpaceInvaders.GameObjects.Enemy;
-using System;
-using System.Collections.Generic;
-
-namespace SpaceInvaders.Entities
+﻿namespace SpaceInvaders.Entities
 {
+    using SpaceInvaders.BaseEntity;
+    using SpaceInvaders.BaseGameEntity;
+    using SpaceInvaders.EntityObjects;
+    using SpaceInvaders.GameObjects;
+    using SpaceInvaders.GameObjects.Enemy;
+    using SpaceInvaders.Render;
+    using System;
+    using System.Collections.Generic;
+
     public class Enemies
     {
         private readonly List<Enemy> _enemies;
@@ -31,7 +32,7 @@ namespace SpaceInvaders.Entities
                 enemy.Plot();
             }
         }
-        public bool NoEnemies()
+        public bool EnemiesLeft()
         {
             bool result = false;
             while(_enemies.Count != 0)
@@ -51,10 +52,10 @@ namespace SpaceInvaders.Entities
             {
                 pos = enemy.GetPosition();
 
-                if(position.PositionX >= pos.PositionX + 2
-                    && position.PositionX < pos.PositionX + 8
-                    && position.PositionY >= pos.PositionY
-                    && position.PositionY < pos.PositionY + 2)
+                if(position.X >= pos.X + 2
+                    && position.X < pos.X + 9
+                    && position.Y >= pos.Y
+                    && position.Y < pos.Y + 2)
                 {
                     enemy.Unplot();
                     tmp = enemy;
@@ -73,15 +74,13 @@ namespace SpaceInvaders.Entities
         {
             int x;
 
-            for(int i = 0; i < 8; i++)
+            for(int i = 0; i < 6; i++)
             {
                 x = i * 10;
                 _enemies.Add(new EnemyCrab(x, 3, ConsoleColor.Green));
                 _enemies.Add(new EnemyCrab(x, 7, ConsoleColor.Yellow));
                 _enemies.Add(new EnemyCrab(x, 11, ConsoleColor.Red));
                 _enemies.Add(new EnemyCrab(x, 15, ConsoleColor.Blue));
-                _enemies.Add(new EnemyCrab(x, 19, ConsoleColor.White));
-                _enemies.Add(new EnemyCrab(x, 19, ConsoleColor.Cyan));
             }
         }
         public List<Position> GetPositions()
@@ -107,7 +106,7 @@ namespace SpaceInvaders.Entities
 
             foreach(var enemy in _enemies)
             {
-                x = enemy.GetX();
+                x = enemy.GetPosition().X;
 
                 if(_move == MoveType.LEFT && x < minX)
                 {

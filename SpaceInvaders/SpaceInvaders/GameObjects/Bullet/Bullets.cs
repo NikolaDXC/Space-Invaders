@@ -1,11 +1,11 @@
 ﻿namespace SpaceInvaders.GameObjects.Bullet
 {
     using SpaceInvaders.BaseGameEntity;
-    using SpaceInvaders.Enviroment;
+    using SpaceInvaders.Render;
     using System;
     using System.Collections.Generic;
 
-    public class Bullets : ConsoleConfiguration
+    public class Bullets : ConsoleRender
     {
         protected List<Bullet> _bullets;
         protected int _boundary;
@@ -36,7 +36,7 @@
             foreach(var bullet in _bullets)
             {
                 bullet.Move();
-                if(bullet.GetY() == _boundary)
+                if(bullet.GetPosition().Y == _boundary)
                 {
                     bulletsToDelete.Add(bullet);
                 }

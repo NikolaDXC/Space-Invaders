@@ -1,8 +1,8 @@
 ﻿namespace SpaceInvaders.BaseEntity
 {
-    using SpaceInvaders.Enviroment;
+    using SpaceInvaders.Render;
 
-    public class GameObject : ConsoleConfiguration
+    public class GameObject : ConsoleRender
     {
         protected Position _position;
 
