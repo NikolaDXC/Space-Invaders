@@ -1,4 +1,4 @@
-﻿namespace SpaceInvaders.Entities
+﻿namespace SpaceInvaders.Enviroment
 {
     using System;
     using System.Runtime.InteropServices;
@@ -18,13 +18,16 @@
         private const int MAXIMIZE = 0xF030;
         private const int COMMAND = 0x0000000;
         private const int WINDOW_WIDTH = 120;
-        private const int WINDOW_HEIGHT = 40;
+        private const int WINDOW_HEIGHT = 45;
+        protected int _drawX;
+        protected int _drawY;
 
         public void Setup()
         {
             DisableResize();
             Console.SetWindowSize(WINDOW_WIDTH, WINDOW_HEIGHT);
             Console.CursorVisible = false;
+            Console.BackgroundColor = ConsoleColor.Black;
         }
         public void DisableResize()
         {
@@ -34,17 +37,17 @@
             DeleteMenu(sysMenu, SIZE, COMMAND);
             DeleteMenu(sysMenu, MAXIMIZE, COMMAND);
         }
-        public void At(int x, int y, string str)
+        public void Draw(int x, int y, string sprite)
         {
             Console.SetCursorPosition(x, y);
-            Console.Write(str);
+            Console.Write(sprite);
         }
         public void SetColor(ConsoleColor color) => Console.ForegroundColor = color;
 
-        public void AtColor(int x, int y, ConsoleColor color, string str)
+        public void DrawColor(ConsoleColor color, string str)
         {
             SetColor(color);
-            At(x, y, str);
+            Draw(_drawX, _drawY, str);
         }
     }
 }

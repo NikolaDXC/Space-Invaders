@@ -1,4 +1,4 @@
-﻿namespace SpaceInvaders.Entities
+﻿namespace SpaceInvaders.BaseEntity
 {
     public class Position
     {
